@@ -6,13 +6,15 @@ body {
 }
 
 /* Style pour le fond en mode clair */
-[data-bs-theme="light"] {
+html {
     --bs-body-bg: #f8f9fa;
+    background-color: #f8f9fa;
 }
 
 /* Style pour le fond en mode sombre */
-[data-bs-theme="dark"] {
+html.dark {
     --bs-body-bg: #1a1a1a;
+    background-color: #1a1a1a;
     color: #ffffff;
 }
 

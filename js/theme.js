@@ -1,63 +1,38 @@
-// Fonction pour changer le thème
+// Fonction pour définir le thème
 function setTheme(theme) {
     const html = document.documentElement;
-    const body = document.body;
+    const themeSwitcher = document.getElementById('themeSwitcher');
+    const themeIcon = themeSwitcher.querySelector('i');
     
-    if (!html || !body) {
-        console.error('DOM elements not found');
-        return;
-    }
-    
-    // Supprimer les classes de thème existantes
-    html.classList.remove('theme-transition', 'dark-mode', 'light-mode');
+    // Supprimer les classes existantes
+    html.classList.remove('dark', 'light');
     
     // Ajouter la classe de transition
     html.classList.add('theme-transition');
     
-    // Définir le thème
-    html.setAttribute('data-bs-theme', theme);
-    body.setAttribute('data-bs-theme', theme);
-    html.classList.add(theme === 'dark' ? 'dark-mode' : 'light-mode');
+    // Définir le nouveau thème
+    html.classList.add(theme);
+    
+    // Mettre à jour l'icône
+    themeIcon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
     
     // Sauvegarder le thème
     localStorage.setItem('theme', theme);
     
-    // Mettre à jour l'icône
-    const themeToggle = document.querySelector('.theme-toggle');
-    if (themeToggle) {
-        themeToggle.innerHTML = theme === 'dark' ? 
-            '<i class="fas fa-sun"></i>' : 
-            '<i class="fas fa-moon"></i>';
-    }
-    
-    // Forcer le reflow pour s'assurer que la transition fonctionne
-    html.offsetHeight;
-    
-    // Supprimer la classe de transition après un court délai
+    // Supprimer la classe de transition après l'animation
     setTimeout(() => {
         html.classList.remove('theme-transition');
     }, 300);
 }
 
-// Attendre que le DOM soit prêt
+// Initialiser le thème au chargement de la page
 document.addEventListener('DOMContentLoaded', function() {
-    // Appliquer le thème initial
     const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-        setTheme(savedTheme);
-    } else {
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        setTheme(prefersDark ? 'dark' : 'light');
-    }
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     
-    // Gestionnaire de clic sur le bouton de thème
-    document.addEventListener('click', function(e) {
-        if (e.target.closest('.theme-toggle')) {
-            const currentTheme = document.documentElement.getAttribute('data-bs-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            setTheme(newTheme);
-        }
-    });
+    // Utiliser le thème sauvegardé ou la préférence système
+    const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+    setTheme(initialTheme);
     
     // Écouter les changements de préférence système
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
@@ -65,4 +40,13 @@ document.addEventListener('DOMContentLoaded', function() {
             setTheme(e.matches ? 'dark' : 'light');
         }
     });
+});
+
+// Gérer le clic sur le bouton de changement de thème
+document.addEventListener('click', function(e) {
+    if (e.target.closest('#themeSwitcher')) {
+        const currentTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        setTheme(newTheme);
+    }
 }); 

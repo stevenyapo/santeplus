@@ -4,6 +4,16 @@ require_once __DIR__ . '/init.php';
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+    <!-- Script pour appliquer le thème avant le chargement du CSS -->
+    <script>
+        (function () {
+            const theme = localStorage.getItem('theme');
+            if (theme === 'dark') {
+                document.documentElement.classList.add('dark');
+            }
+        })();
+    </script>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SantéPlus - Centre de Santé</title>
@@ -29,6 +39,7 @@ require_once __DIR__ . '/init.php';
     <link rel="stylesheet" href="<?php echo url('assets/css/background.css'); ?>">
     <link rel="stylesheet" href="<?php echo url('assets/css/style.css'); ?>">
     <link rel="stylesheet" href="<?php echo url('assets/css/themes.css'); ?>">
+    <link rel="stylesheet" href="<?php echo url('assets/css/dark-mode.css'); ?>">
 
     <!-- SweetAlert2 CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
@@ -48,10 +59,21 @@ require_once __DIR__ . '/init.php';
     
     <!-- GSAP for animations -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    
     <!-- Custom JS -->
     <script src="<?php echo url('js/theme.js'); ?>"></script>
 </head>
 <body>
+    <!-- Preloader -->
+    <div id="preloader" style="
+        position: fixed;
+        inset: 0;
+        background: #121212;
+        z-index: 9999;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    "></div>
+
     <!-- Custom Cursor Elements -->
     <div class="custom-cursor"></div>
     <div class="cursor-glow"></div>
@@ -67,7 +89,7 @@ require_once __DIR__ . '/init.php';
     <?php endif; ?>
 
     <!-- Bouton de basculement de thème -->
-    <button class="theme-toggle" title="Changer le thème">
+    <button id="themeSwitcher" class="theme-toggle" title="Changer le thème">
         <i class="fas fa-moon"></i>
     </button>
 
@@ -143,6 +165,21 @@ require_once __DIR__ . '/init.php';
 
                 window.addEventListener('resize', handleResponsive);
                 handleResponsive();
+            }
+
+            // Gestion du preloader
+            const preloader = document.getElementById('preloader');
+            if (preloader) {
+                // Afficher le preloader pendant le chargement
+                preloader.style.opacity = '1';
+                
+                // Masquer le preloader une fois la page chargée
+                window.addEventListener('load', () => {
+                    preloader.style.opacity = '0';
+                    setTimeout(() => {
+                        preloader.remove();
+                    }, 300);
+                });
             }
         });
     </script>
