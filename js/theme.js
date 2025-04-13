@@ -1,6 +1,12 @@
 // Fonction pour changer le thème
 function setTheme(theme) {
     const html = document.documentElement;
+    const body = document.body;
+    
+    if (!html || !body) {
+        console.error('DOM elements not found');
+        return;
+    }
     
     // Supprimer les classes de thème existantes
     html.classList.remove('theme-transition', 'dark-mode', 'light-mode');
@@ -10,10 +16,19 @@ function setTheme(theme) {
     
     // Définir le thème
     html.setAttribute('data-bs-theme', theme);
+    body.setAttribute('data-bs-theme', theme);
     html.classList.add(theme === 'dark' ? 'dark-mode' : 'light-mode');
     
     // Sauvegarder le thème
     localStorage.setItem('theme', theme);
+    
+    // Mettre à jour l'icône
+    const themeToggle = document.querySelector('.theme-toggle');
+    if (themeToggle) {
+        themeToggle.innerHTML = theme === 'dark' ? 
+            '<i class="fas fa-sun"></i>' : 
+            '<i class="fas fa-moon"></i>';
+    }
     
     // Forcer le reflow pour s'assurer que la transition fonctionne
     html.offsetHeight;
@@ -22,36 +37,27 @@ function setTheme(theme) {
     setTimeout(() => {
         html.classList.remove('theme-transition');
     }, 300);
-    
-    // Recharger les événements de la page
-    document.querySelectorAll('button, a, select').forEach(element => {
-        const clone = element.cloneNode(true);
-        element.parentNode.replaceChild(clone, element);
-    });
 }
 
-// Initialisation au chargement de la page
+// Attendre que le DOM soit prêt
 document.addEventListener('DOMContentLoaded', function() {
-    const themeSwitcher = document.getElementById('themeSwitcher');
-    
-    // Gestionnaire de clic sur le bouton de thème
-    if (themeSwitcher) {
-        themeSwitcher.addEventListener('click', function() {
-            const currentTheme = document.documentElement.getAttribute('data-bs-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            setTheme(newTheme);
-        });
-    }
-    
-    // Appliquer le thème sauvegardé au chargement
+    // Appliquer le thème initial
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme) {
         setTheme(savedTheme);
     } else {
-        // Utiliser le thème du système par défaut
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
         setTheme(prefersDark ? 'dark' : 'light');
     }
+    
+    // Gestionnaire de clic sur le bouton de thème
+    document.addEventListener('click', function(e) {
+        if (e.target.closest('.theme-toggle')) {
+            const currentTheme = document.documentElement.getAttribute('data-bs-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme);
+        }
+    });
     
     // Écouter les changements de préférence système
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {

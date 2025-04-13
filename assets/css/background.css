@@ -2,21 +2,24 @@
 body {
     background-color: var(--bs-body-bg);
     transition: background-color 0.3s ease;
+    min-height: 100vh;
 }
 
 /* Style pour le fond en mode clair */
-[data-theme="light"] body {
-    background-color: #f8f9fa;
+[data-bs-theme="light"] {
+    --bs-body-bg: #f8f9fa;
 }
 
 /* Style pour le fond en mode sombre */
-[data-theme="dark"] body {
-    background-color: #1a1a1a;
+[data-bs-theme="dark"] {
+    --bs-body-bg: #1a1a1a;
+    color: #ffffff;
 }
 
 /* Effet de gradient subtil */
 .main-content {
     position: relative;
+    background-color: var(--bs-body-bg);
 }
 
 .main-content::before {
@@ -81,4 +84,5 @@ body {
 .container-fluid {
     position: relative;
     z-index: 1;
+    background-color: var(--bs-body-bg);
 } 

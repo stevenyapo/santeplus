@@ -48,39 +48,8 @@ require_once __DIR__ . '/init.php';
     
     <!-- GSAP for animations -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script>
-        // Gestion du thème
-        document.addEventListener('DOMContentLoaded', function() {
-            const themeToggle = document.querySelector('.theme-toggle');
-            const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-            
-            // Vérifier le thème stocké ou utiliser la préférence système
-            const currentTheme = localStorage.getItem('theme') || 
-                               (prefersDarkScheme.matches ? 'dark' : 'light');
-            
-            // Appliquer le thème initial
-            document.documentElement.setAttribute('data-theme', currentTheme);
-            document.documentElement.setAttribute('data-bs-theme', currentTheme);
-            
-            // Mettre à jour l'icône
-            updateThemeIcon(currentTheme);
-            
-            // Gérer le clic sur le bouton
-            themeToggle.addEventListener('click', function() {
-                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-                document.documentElement.setAttribute('data-theme', newTheme);
-                document.documentElement.setAttribute('data-bs-theme', newTheme);
-                localStorage.setItem('theme', newTheme);
-                updateThemeIcon(newTheme);
-            });
-            
-            function updateThemeIcon(theme) {
-                themeToggle.innerHTML = theme === 'light' ? 
-                    '<i class="fas fa-moon"></i>' : 
-                    '<i class="fas fa-sun"></i>';
-            }
-        });
-    </script>
+    <!-- Custom JS -->
+    <script src="<?php echo url('js/theme.js'); ?>"></script>
 </head>
 <body>
     <!-- Custom Cursor Elements -->
