@@ -35,7 +35,7 @@ require_once __DIR__ . '/init.php';
     
     <!-- Custom CSS -->
     <link rel="stylesheet" href="<?php echo url('assets/css/theme.css'); ?>">
-    <link rel="stylesheet" href="<?php echo url('assets/css/sidebar.css'); ?>">
+    <link rel="stylesheet" href="<?php echo url('assets/css/sidebar.css?v=' . time()); ?>">
     <link rel="stylesheet" href="<?php echo url('assets/css/background.css'); ?>">
     <link rel="stylesheet" href="<?php echo url('assets/css/style.css'); ?>">
     <link rel="stylesheet" href="<?php echo url('assets/css/themes.css'); ?>">
@@ -81,11 +81,6 @@ require_once __DIR__ . '/init.php';
     <?php if (isset($_SESSION['user_id'])): ?>
         <!-- Inclure la sidebar pour les utilisateurs connectés -->
         <?php include __DIR__ . '/sidebar.php'; ?>
-        
-        <!-- Bouton pour afficher/masquer la sidebar -->
-        <div class="sidebar-toggle" id="sidebarToggle">
-            <i class="fas fa-bars"></i>
-        </div>
     <?php endif; ?>
 
     <!-- Bouton de basculement de thème -->
@@ -100,6 +95,7 @@ require_once __DIR__ . '/init.php';
     <!-- Custom Cursor Script -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Custom Cursor
             const cursor = document.querySelector('.custom-cursor');
             const cursorGlow = document.querySelector('.cursor-glow');
             
@@ -133,38 +129,6 @@ require_once __DIR__ . '/init.php';
                         cursorGlow.style.transform = 'scale(1)';
                     });
                 });
-            }
-
-            // Sidebar Toggle
-            const sidebar = document.querySelector('.sidebar');
-            const mainContent = document.querySelector('.main-content');
-            const sidebarToggle = document.getElementById('sidebarToggle');
-            const overlay = document.querySelector('.sidebar-overlay');
-
-            if (sidebar && sidebarToggle) {
-                sidebarToggle.addEventListener('click', function() {
-                    sidebar.classList.toggle('collapsed');
-                    mainContent.classList.toggle('expanded');
-                });
-
-                // Close sidebar on overlay click
-                if (overlay) {
-                    overlay.addEventListener('click', function() {
-                        sidebar.classList.remove('show');
-                        overlay.classList.remove('show');
-                    });
-                }
-
-                // Handle responsive behavior
-                function handleResponsive() {
-                    if (window.innerWidth <= 768) {
-                        sidebar.classList.remove('collapsed');
-                        mainContent.classList.remove('expanded');
-                    }
-                }
-
-                window.addEventListener('resize', handleResponsive);
-                handleResponsive();
             }
 
             // Gestion du preloader
