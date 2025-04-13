@@ -1,0 +1,289 @@
+/* Styles spécifiques pour les pages d'administration */
+
+/* Gestion des comptes */
+#gestion-comptes-container .card {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#gestion-comptes-container .card-header {
+    background-color: var(--secondary-light);
+    color: white;
+    font-weight: 600;
+    border: none;
+}
+
+#gestion-comptes-container .nav-tabs {
+    border-bottom: none;
+    margin-bottom: 1rem;
+}
+
+#gestion-comptes-container .nav-tabs .nav-link {
+    color: var(--text);
+    font-weight: 500;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+    margin-right: 0.5rem;
+    transition: var(--transition);
+}
+
+#gestion-comptes-container .nav-tabs .nav-link:hover {
+    background-color: rgba(52, 152, 219, 0.1);
+    color: var(--accent);
+}
+
+#gestion-comptes-container .nav-tabs .nav-link.active {
+    background-color: var(--accent);
+    color: white;
+    border-color: var(--accent);
+}
+
+/* Style de tableau amélioré */
+#gestion-comptes-container .table {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+
+#gestion-comptes-container .table th {
+    background-color: rgba(52, 152, 219, 0.1);
+    color: var(--secondary);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+    border: none;
+}
+
+[data-bs-theme="dark"] #gestion-comptes-container .table th {
+    background-color: rgba(52, 152, 219, 0.2);
+    color: var(--text-dark);
+}
+
+#gestion-comptes-container .table td {
+    vertical-align: middle;
+    padding: 0.75rem;
+    border-bottom: 1px solid var(--card-border);
+}
+
+#gestion-comptes-container .table tr:last-child td {
+    border-bottom: none;
+}
+
+#gestion-comptes-container .table tr:hover {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+[data-bs-theme="dark"] #gestion-comptes-container .table tr:hover {
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+/* Badges de statut */
+#gestion-comptes-container .badge {
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.5em 0.75em;
+    border-radius: 30px;
+}
+
+#gestion-comptes-container .badge-actif {
+    background-color: rgba(39, 174, 96, 0.2);
+    color: var(--success);
+    border: 1px solid var(--success);
+}
+
+#gestion-comptes-container .badge-inactif {
+    background-color: rgba(231, 76, 60, 0.2);
+    color: var(--danger);
+    border: 1px solid var(--danger);
+}
+
+/* Boutons d'action plus grands et plus lisibles */
+#gestion-comptes-container .actions-column {
+    min-width: 150px;
+    white-space: nowrap;
+}
+
+#gestion-comptes-container .table .btn-group .btn {
+    position: relative;
+    margin: 0 2px;
+    border-radius: 6px;
+    width: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    border: none;
+}
+
+#gestion-comptes-container .table .btn-group .btn i {
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    color: white !important;
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+}
+
+#gestion-comptes-container .table .btn-group .btn-info {
+    background-color: #17a2b8 !important;
+    box-shadow: 0 2px 4px rgba(52, 152, 219, 0.3);
+}
+
+#gestion-comptes-container .table .btn-group .btn-danger {
+    background-color: #dc3545 !important;
+    box-shadow: 0 2px 4px rgba(231, 76, 60, 0.3);
+}
+
+#gestion-comptes-container .table .btn-group .btn-warning {
+    background-color: #ffc107 !important;
+    box-shadow: 0 2px 4px rgba(243, 156, 18, 0.3);
+}
+
+#gestion-comptes-container .table .btn-group .btn-success {
+    background-color: #28a745 !important;
+    box-shadow: 0 2px 4px rgba(39, 174, 96, 0.3);
+}
+
+#gestion-comptes-container .table .btn-group .btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+}
+
+#gestion-comptes-container .table .btn-group .btn:hover i {
+    transform: scale(1.2);
+}
+
+#gestion-comptes-container .table .btn-group .btn:active {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+#gestion-comptes-container .table .btn-group .btn:hover::after {
+    content: attr(title);
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    font-size: 0.75rem;
+    padding: 4px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+    z-index: 100;
+}
+
+[data-bs-theme="dark"] #gestion-comptes-container .table .btn-group .btn {
+    opacity: 0.9;
+}
+
+[data-bs-theme="dark"] #gestion-comptes-container .table .btn-group .btn:hover {
+    opacity: 1;
+}
+
+/* Modals */
+.modal-content {
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+}
+
+.modal-header {
+    background-color: var(--secondary-light);
+    color: white;
+    border: none;
+}
+
+.modal-footer {
+    border-top: 1px solid var(--card-border);
+}
+
+/* Formulaires */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    #gestion-comptes-container .table .btn-group .btn {
+        width: 32px;
+        height: 32px;
+        margin: 0 2px;
+    }
+    
+    #gestion-comptes-container .actions-column {
+        min-width: auto;
+    }
+}
+
+/* Styles pour les boutons d'action */
+.btn-group .btn i {
+    color: white !important;
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Styles spécifiques pour chaque type de bouton */
+.btn-info {
+    background-color: #17a2b8 !important;
+}
+.btn-info:hover {
+    background-color: #138496 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-danger {
+    background-color: #dc3545 !important;
+}
+.btn-danger:hover {
+    background-color: #c82333 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-warning {
+    background-color: #ffc107 !important;
+}
+.btn-warning:hover {
+    background-color: #e0a800 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-success {
+    background-color: #28a745 !important;
+}
+.btn-success:hover {
+    background-color: #218838 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Tooltip pour les boutons */
+[title]:hover::after {
+    content: attr(title);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    z-index: 10;
+}
+
+/* Assurez-vous que les boutons sont visibles en mode sombre */
+.dark-mode .btn {
+    opacity: 1 !important;
+} 

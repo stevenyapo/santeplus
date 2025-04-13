@@ -1,0 +1,115 @@
+:root {
+    /* Couleurs du thème clair */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --text-primary: #212529;
+    --text-secondary: #6c757d;
+    --border-color: #dee2e6;
+    --card-bg: #ffffff;
+    --card-border: #dee2e6;
+    --hover-bg: #f8f9fa;
+}
+
+[data-theme="dark"] {
+    /* Couleurs du thème sombre */
+    --bg-primary: #1a1d20;
+    --bg-secondary: #212529;
+    --text-primary: #f8f9fa;
+    --text-secondary: #adb5bd;
+    --border-color: #495057;
+    --card-bg: #212529;
+    --card-border: #343a40;
+    --hover-bg: #2c3034;
+}
+
+/* Application des variables CSS */
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+.card {
+    background-color: var(--card-bg);
+    border-color: var(--card-border);
+}
+
+.table {
+    color: var(--text-primary);
+}
+
+.table-hover tbody tr:hover {
+    background-color: var(--hover-bg);
+}
+
+.bg-light {
+    background-color: var(--bg-secondary) !important;
+}
+
+.text-muted {
+    color: var(--text-secondary) !important;
+}
+
+/* Style du bouton de basculement */
+.theme-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1);
+}
+
+/* Ajustements pour les formulaires */
+.form-control {
+    background-color: var(--bg-primary);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+.form-control:focus {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+/* Ajustements pour les modales */
+.modal-content {
+    background-color: var(--card-bg);
+    border-color: var(--card-border);
+}
+
+.modal-header {
+    border-bottom-color: var(--border-color);
+}
+
+.modal-footer {
+    border-top-color: var(--border-color);
+}
+
+/* Ajustements pour les badges */
+.badge {
+    color: var(--text-primary);
+}
+
+/* Ajustements pour les listes */
+.list-group-item {
+    background-color: var(--card-bg);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+.list-group-item:hover {
+    background-color: var(--hover-bg);
+} 
