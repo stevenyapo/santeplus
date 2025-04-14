@@ -62,7 +62,15 @@ $current_page = basename($_SERVER['PHP_SELF']);
                        class="sidebar-link <?php echo $current_page === 'messagerie.php' ? 'active' : ''; ?>"
                        data-tooltip="Messagerie">
                         <i class="fas fa-envelope"></i>
-                        <span class="nav-text">Messagerie</span>
+                        <span class="nav-text">Messages</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" 
+                       class="sidebar-link notifications-link"
+                       data-tooltip="Notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="nav-text">Notifications</span>
                         <?php if (isset($notifications_count) && $notifications_count > 0): ?>
                             <span class="badge"><?php echo $notifications_count; ?></span>
                         <?php endif; ?>
@@ -172,11 +180,11 @@ document.addEventListener('DOMContentLoaded', function() {
             mainContent.classList.add('expanded');
         }
 
-        // Toggle sidebar
+    // Toggle sidebar
         function toggleSidebar(e) {
             if (e) e.preventDefault();
-            sidebar.classList.toggle('collapsed');
-            mainContent.classList.toggle('expanded');
+        sidebar.classList.toggle('collapsed');
+        mainContent.classList.toggle('expanded');
             
             // Animate toggle button
             const icon = sidebarToggle.querySelector('i');
@@ -223,10 +231,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Close sidebar on overlay click (mobile)
     if (overlay) {
-        overlay.addEventListener('click', function() {
-            sidebar.classList.remove('show');
-            overlay.classList.remove('show');
-        });
+    overlay.addEventListener('click', function() {
+        sidebar.classList.remove('show');
+        overlay.classList.remove('show');
+    });
     }
 
     // Add hover animations for tooltips
@@ -247,7 +255,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Notifications handling
     const notificationsPanel = document.querySelector('.notifications-panel');
-    const notificationLinks = document.querySelectorAll('.sidebar-link[data-tooltip="Messages"], .sidebar-link[data-tooltip="Messagerie"]');
+    const notificationLinks = document.querySelectorAll('.notifications-link');
     const closeNotificationsBtn = document.querySelector('.close-notifications');
 
     function toggleNotifications(event) {
@@ -277,8 +285,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Close notifications when clicking outside
     document.addEventListener('click', function(event) {
         if (!event.target.closest('.notifications-panel') && 
-            !event.target.closest('.sidebar-link[data-tooltip="Messages"]') &&
-            !event.target.closest('.sidebar-link[data-tooltip="Messagerie"]')) {
+            !event.target.closest('.notifications-link')) {
             notificationsPanel.classList.remove('show');
         }
     });
@@ -323,4 +330,4 @@ function hideTooltip() {
         tooltip.remove();
     }
 }
-</script> 
+</script>

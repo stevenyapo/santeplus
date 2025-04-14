@@ -416,7 +416,7 @@
     .main-content {
         margin-left: 0;
     }
-    
+
     .sidebar-overlay {
         position: fixed;
         top: 0;
@@ -429,7 +429,7 @@
         visibility: hidden;
         transition: all 0.3s ease;
     }
-    
+
     .sidebar-overlay.show {
         opacity: 1;
         visibility: visible;

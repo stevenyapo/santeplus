@@ -51,18 +51,39 @@ require_once '../includes/header.php';
 ?>
 
 <div class="container-fluid py-4">
-    <!-- En-tête du tableau de bord -->
+    <!-- En-tête avec les boutons de filtre -->
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="h3 mb-0">Tableau de bord</h1>
+        <h2 class="mb-0">Tableau de bord</h2>
         <div class="d-flex gap-2">
-            <button class="btn btn-primary">
-                <i class="fas fa-download me-2"></i>Exporter
-            </button>
-            <button class="btn btn-secondary">
-                <i class="fas fa-calendar me-2"></i>Filtrer
+            <?php if (isset($_GET['periode']) || isset($_GET['date_debut']) || isset($_GET['date_fin'])): ?>
+                <a href="<?php echo $_SERVER['PHP_SELF']; ?>" class="btn btn-outline-secondary">
+                    <i class="fas fa-times me-2"></i>Effacer les filtres
+                </a>
+            <?php endif; ?>
+            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#filterModal">
+                <i class="fas fa-filter me-2"></i>Filtrer
             </button>
         </div>
     </div>
+
+    <!-- Affichage des filtres actifs -->
+    <?php if (isset($_GET['periode']) || isset($_GET['date_debut']) || isset($_GET['date_fin'])): ?>
+        <div class="alert alert-info d-flex align-items-center mb-4">
+            <i class="fas fa-info-circle me-2"></i>
+            <div>
+                Filtres actifs : 
+                <?php if (isset($_GET['periode'])): ?>
+                    <span class="badge bg-secondary me-2">Période : <?php echo $_GET['periode'] === 'mois' ? 'Mensuelle' : 'Annuelle'; ?></span>
+                <?php endif; ?>
+                <?php if (isset($_GET['date_debut'])): ?>
+                    <span class="badge bg-secondary me-2">Du : <?php echo date('d/m/Y', strtotime($_GET['date_debut'])); ?></span>
+                <?php endif; ?>
+                <?php if (isset($_GET['date_fin'])): ?>
+                    <span class="badge bg-secondary me-2">Au : <?php echo date('d/m/Y', strtotime($_GET['date_fin'])); ?></span>
+                <?php endif; ?>
+            </div>
+        </div>
+    <?php endif; ?>
 
     <!-- Statistiques principales -->
     <div class="row g-3 mb-4">
@@ -239,34 +260,77 @@ require_once '../includes/header.php';
     </div>
 </div>
 
-<!-- Scripts pour les graphiques -->
+<?php require_once '../includes/footer.php'; ?>
+
+<!-- Modal de filtrage -->
+<div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="filterModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="filterModalLabel">Filtrer les données</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+            </div>
+            <form id="filterForm" method="GET">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="periode" class="form-label">Période</label>
+                        <select class="form-select" id="periode" name="periode">
+                            <option value="mois" <?php echo ($periode ?? 'mois') === 'mois' ? 'selected' : ''; ?>>Par mois</option>
+                            <option value="annee" <?php echo ($periode ?? '') === 'annee' ? 'selected' : ''; ?>>Par année</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="date_debut" class="form-label">Date de début</label>
+                        <input type="date" class="form-control" id="date_debut" name="date_debut" 
+                               value="<?php echo isset($_GET['date_debut']) ? $_GET['date_debut'] : date('Y-m-01', strtotime('-11 months')); ?>">
+                    </div>
+                    <div class="mb-3">
+                        <label for="date_fin" class="form-label">Date de fin</label>
+                        <input type="date" class="form-control" id="date_fin" name="date_fin" 
+                               value="<?php echo isset($_GET['date_fin']) ? $_GET['date_fin'] : date('Y-m-d'); ?>">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                    <button type="submit" class="btn btn-primary">Appliquer les filtres</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts Bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+<!-- Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     // Configuration du graphique d'activité
     const ctx = document.getElementById('activityChart').getContext('2d');
-new Chart(ctx, {
-    type: 'line',
-    data: {
+    new Chart(ctx, {
+        type: 'line',
+        data: {
             labels: <?php echo json_encode($activity_labels); ?>,
-        datasets: [{
+            datasets: [{
                 label: 'Rapports soumis',
                 data: <?php echo json_encode($activity_counts); ?>,
                 borderColor: 'rgb(75, 192, 192)',
                 tension: 0.1
-        }]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-            legend: {
-                display: false
-            }
+            }]
         },
-        scales: {
-            y: {
-                beginAtZero: true,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
                     grid: {
                         color: 'rgba(0, 0, 0, 0.1)'
                     }
@@ -279,7 +343,53 @@ new Chart(ctx, {
             }
         }
     });
+
+    // Gestion du formulaire de filtrage
+    const filterForm = document.getElementById('filterForm');
+    const filterModal = new bootstrap.Modal(document.getElementById('filterModal'));
+
+    if (filterForm) {
+        filterForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Récupérer les valeurs du formulaire
+            const periode = document.getElementById('periode').value;
+            const dateDebut = document.getElementById('date_debut').value;
+            const dateFin = document.getElementById('date_fin').value;
+            
+            // Construire l'URL avec les paramètres
+            const params = new URLSearchParams(window.location.search);
+            params.set('periode', periode);
+            params.set('date_debut', dateDebut);
+            params.set('date_fin', dateFin);
+            
+            // Fermer le modal
+            filterModal.hide();
+            
+            // Rediriger avec les nouveaux paramètres
+            window.location.href = window.location.pathname + '?' + params.toString();
+        });
+        
+        // Validation des dates
+        const dateDebut = document.getElementById('date_debut');
+        const dateFin = document.getElementById('date_fin');
+        
+        dateDebut.addEventListener('change', function() {
+            dateFin.min = this.value;
+            if (dateFin.value && dateFin.value < this.value) {
+                dateFin.value = this.value;
+            }
+        });
+        
+        dateFin.addEventListener('change', function() {
+            dateDebut.max = this.value;
+            if (dateDebut.value && dateDebut.value > this.value) {
+                dateDebut.value = this.value;
+            }
+        });
+    }
 });
 </script>
 
-<?php require_once '../includes/footer.php'; ?> 
+</body>
+</html> 
