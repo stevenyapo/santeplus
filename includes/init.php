@@ -4,6 +4,43 @@
  * Ce fichier gère la session, les inclusions et les fonctions communes
  */
 
+require_once __DIR__ . '/Logger.php';
+
+// Initialisation du logger
+$logger = Logger::getInstance();
+
+// Configuration du niveau de log en fonction de l'environnement
+if (defined('ENVIRONMENT') && ENVIRONMENT === 'development') {
+    $logger->setLogLevel(Logger::DEBUG);
+} else {
+    $logger->setLogLevel(Logger::INFO);
+}
+
+// Log de l'accès à la page
+$logger->access("Accès à la page: {$_SERVER['REQUEST_URI']}", [
+    'ip' => $_SERVER['REMOTE_ADDR'],
+    'user_agent' => $_SERVER['HTTP_USER_AGENT'],
+    'method' => $_SERVER['REQUEST_METHOD']
+]);
+
+// Gestion des erreurs
+set_error_handler(function($errno, $errstr, $errfile, $errline) use ($logger) {
+    $logger->error($errstr, [
+        'file' => $errfile,
+        'line' => $errline,
+        'type' => $errno
+    ]);
+    return false;
+});
+
+// Gestion des exceptions
+set_exception_handler(function($exception) use ($logger) {
+    $logger->logException($exception);
+    // Afficher une page d'erreur personnalisée
+    include __DIR__ . '/../templates/error.php';
+    exit;
+});
+
 // Configuration de la base de données
 $host = 'localhost';
 $dbname = 'santeplus';

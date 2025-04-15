@@ -42,4 +42,13 @@ function checkRole($requiredRole) {
         exit();
     }
 }
+
+// Fonction pour vérifier si l'utilisateur est connecté
+function checkLogin() {
+    if (!isLoggedIn()) {
+        $_SESSION['error_message'] = "Veuillez vous connecter pour accéder à cette page";
+        header('Location: /santeplus/login.php');
+        exit();
+    }
+}
 ?> 

@@ -26,6 +26,7 @@ class ComposerStaticInitf01ca2e7ccfd85272670bf19ebc4f1fb
             'Psr\\Log\\' => 8,
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Http\\Client\\' => 16,
+            'Predis\\' => 7,
             'PhpOffice\\PhpSpreadsheet\\' => 25,
         ),
         'M' => 
@@ -71,6 +72,10 @@ class ComposerStaticInitf01ca2e7ccfd85272670bf19ebc4f1fb
         'Psr\\Http\\Client\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/http-client/src',
+        ),
+        'Predis\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/predis/predis/src',
         ),
         'PhpOffice\\PhpSpreadsheet\\' => 
         array (

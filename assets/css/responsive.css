@@ -1,0 +1,164 @@
+/* Styles de base pour tous les appareils */
+.container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+/* Styles pour les tablettes (768px et plus) */
+@media (min-width: 768px) {
+    .container {
+        max-width: 720px;
+    }
+}
+
+/* Styles pour les ordinateurs portables (992px et plus) */
+@media (min-width: 992px) {
+    .container {
+        max-width: 960px;
+    }
+}
+
+/* Styles pour les ordinateurs de bureau (1200px et plus) */
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1140px;
+    }
+}
+
+/* Styles pour les petits écrans (moins de 768px) */
+@media (max-width: 767px) {
+    .navbar-nav {
+        flex-direction: column;
+    }
+    
+    .table-responsive {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .card-deck {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .card {
+        margin-bottom: 15px;
+    }
+}
+
+/* Styles pour les très petits écrans (moins de 576px) */
+@media (max-width: 575px) {
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+    }
+    
+    h3 {
+        font-size: 1.2rem;
+    }
+    
+    .btn {
+        display: block;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    
+    .form-group {
+        margin-bottom: 15px;
+    }
+}
+
+/* Styles pour améliorer la lisibilité sur mobile */
+@media (max-width: 767px) {
+    body {
+        font-size: 16px;
+        line-height: 1.5;
+    }
+    
+    .pagination {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .pagination .page-item {
+        margin: 2px;
+    }
+}
+
+/* Styles pour les graphiques responsifs */
+.chart-container {
+    position: relative;
+    margin: auto;
+    height: 300px;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .chart-container {
+        height: 400px;
+    }
+}
+
+/* Styles pour les formulaires responsifs */
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -5px;
+    margin-left: -5px;
+}
+
+.form-group {
+    padding-right: 5px;
+    padding-left: 5px;
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+
+@media (min-width: 768px) {
+    .form-group {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+}
+
+/* Styles pour les modales responsives */
+.modal-dialog {
+    margin: 1.75rem auto;
+    max-width: 95%;
+}
+
+@media (min-width: 576px) {
+    .modal-dialog {
+        max-width: 500px;
+    }
+}
+
+/* Styles pour les images responsives */
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Styles pour les tableaux responsifs */
+.table-responsive {
+    min-height: .01%;
+    overflow-x: auto;
+}
+
+@media screen and (max-width: 767px) {
+    .table-responsive {
+        width: 100%;
+        margin-bottom: 15px;
+        overflow-y: hidden;
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+        border: 1px solid #ddd;
+    }
+} 

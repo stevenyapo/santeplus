@@ -100,15 +100,15 @@ if ($nb_mois > 0) {
                             <thead>
                                 <tr class="text-center">
                                     <th rowspan="2" class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">MOIS</th>
-                                    <th colspan="5" class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 bg-info bg-opacity-10">Hommes</th>
+                                    <th colspan="5" class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 bg-primary bg-opacity-10">Hommes</th>
                                     <th colspan="5" class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 bg-danger bg-opacity-10">Femmes</th>
                                 </tr>
                                 <tr class="text-center">
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 bg-info bg-opacity-10">0-12 ans</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 bg-info bg-opacity-10">13-19 ans</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 bg-info bg-opacity-10">20-49 ans</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 bg-info bg-opacity-10">≥50 ans</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 bg-info bg-opacity-10">TOTAL</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 bg-primary bg-opacity-10">0-12 ans</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 bg-primary bg-opacity-10">13-19 ans</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 bg-primary bg-opacity-10">20-49 ans</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 bg-primary bg-opacity-10">≥50 ans</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 bg-primary bg-opacity-10">TOTAL</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 bg-danger bg-opacity-10">0-12 ans</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 bg-danger bg-opacity-10">13-19 ans</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 bg-danger bg-opacity-10">20-49 ans</th>
@@ -122,19 +122,19 @@ if ($nb_mois > 0) {
                                         <td>
                                             <p class="text-xs font-weight-bold mb-0"><?php echo $mois_fr[$donnees['mois']]; ?></p>
                                         </td>
-                                        <td class="bg-info bg-opacity-10">
+                                        <td class="bg-primary bg-opacity-10">
                                             <p class="text-xs font-weight-bold mb-0"><?php echo $donnees['hommes_0_12']; ?></p>
                                         </td>
-                                        <td class="bg-info bg-opacity-10">
+                                        <td class="bg-primary bg-opacity-10">
                                             <p class="text-xs font-weight-bold mb-0"><?php echo $donnees['hommes_13_19']; ?></p>
                                         </td>
-                                        <td class="bg-info bg-opacity-10">
+                                        <td class="bg-primary bg-opacity-10">
                                             <p class="text-xs font-weight-bold mb-0"><?php echo $donnees['hommes_20_49']; ?></p>
                                         </td>
-                                        <td class="bg-info bg-opacity-10">
+                                        <td class="bg-primary bg-opacity-10">
                                             <p class="text-xs font-weight-bold mb-0"><?php echo $donnees['hommes_50_plus']; ?></p>
                                         </td>
-                                        <td class="bg-info bg-opacity-10">
+                                        <td class="bg-primary bg-opacity-10">
                                             <p class="text-xs font-weight-bold mb-0">
                                                 <?php echo $donnees['hommes_0_12'] + $donnees['hommes_13_19'] + $donnees['hommes_20_49'] + $donnees['hommes_50_plus']; ?>
                                             </p>
@@ -162,19 +162,19 @@ if ($nb_mois > 0) {
                                     <td>
                                         <p class="text-xs font-weight-bold mb-0">Effectif moyen</p>
                                     </td>
-                                    <td class="bg-info bg-opacity-10">
+                                    <td class="bg-primary bg-opacity-10">
                                         <p class="text-xs font-weight-bold mb-0"><?php echo $moyennes['hommes_0_12']; ?></p>
                                     </td>
-                                    <td class="bg-info bg-opacity-10">
+                                    <td class="bg-primary bg-opacity-10">
                                         <p class="text-xs font-weight-bold mb-0"><?php echo $moyennes['hommes_13_19']; ?></p>
                                     </td>
-                                    <td class="bg-info bg-opacity-10">
+                                    <td class="bg-primary bg-opacity-10">
                                         <p class="text-xs font-weight-bold mb-0"><?php echo $moyennes['hommes_20_49']; ?></p>
                                     </td>
-                                    <td class="bg-info bg-opacity-10">
+                                    <td class="bg-primary bg-opacity-10">
                                         <p class="text-xs font-weight-bold mb-0"><?php echo $moyennes['hommes_50_plus']; ?></p>
                                     </td>
-                                    <td class="bg-info bg-opacity-10">
+                                    <td class="bg-primary bg-opacity-10">
                                         <p class="text-xs font-weight-bold mb-0">
                                             <?php echo $moyennes['hommes_0_12'] + $moyennes['hommes_13_19'] + $moyennes['hommes_20_49'] + $moyennes['hommes_50_plus']; ?>
                                         </p>

@@ -1,0 +1,127 @@
+.notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: #ff4444;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 12px;
+    display: none;
+}
+
+.notifications-container {
+    max-height: 400px;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.notification-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+    transition: all 0.3s ease;
+}
+
+.notification-item.unread {
+    background-color: #e3f2fd;
+    border-left: 4px solid #2196f3;
+}
+
+.notification-item:hover {
+    background-color: #e9ecef;
+}
+
+.notification-content {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.notification-title {
+    margin: 0 0 5px 0;
+    font-weight: 600;
+}
+
+.notification-message {
+    margin: 0;
+    color: #666;
+}
+
+.notification-time {
+    color: #999;
+    font-size: 0.8em;
+}
+
+.delete-notification {
+    background: none;
+    border: none;
+    color: #999;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.delete-notification:hover {
+    color: #ff4444;
+}
+
+/* Styles pour les notifications toast */
+.notification-toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+}
+
+.notification-toast.show {
+    transform: translateX(0);
+}
+
+.notification-toast.info {
+    border-left: 4px solid #2196f3;
+}
+
+.notification-toast.success {
+    border-left: 4px solid #4caf50;
+}
+
+.notification-toast.warning {
+    border-left: 4px solid #ff9800;
+}
+
+.notification-toast.error {
+    border-left: 4px solid #f44336;
+}
+
+/* Styles responsifs */
+@media (max-width: 768px) {
+    .notification-toast {
+        width: 90%;
+        right: 5%;
+    }
+
+    .notifications-container {
+        max-height: 300px;
+    }
+
+    .notification-item {
+        padding: 8px;
+    }
+
+    .notification-title {
+        font-size: 1em;
+    }
+
+    .notification-message {
+        font-size: 0.9em;
+    }
+} 

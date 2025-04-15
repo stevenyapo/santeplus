@@ -2,6 +2,7 @@
     "require": {
         "phpoffice/phpspreadsheet": "^4.1",
         "tecnickcom/tcpdf": "^6.9",
-        "mpdf/mpdf": "^8.2"
+        "mpdf/mpdf": "^8.2",
+        "predis/predis": "^2.3"
     }
 }
