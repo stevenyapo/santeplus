@@ -173,94 +173,296 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="/santeplus/style.css">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    
     <style>
+        :root {
+            --primary-color: #4CAF50;
+            --primary-hover: #45a049;
+            --bg-color: #1a1a1a;
+            --card-bg: #2d2d2d;
+            --text-color: #ffffff;
+            --input-bg: #3d3d3d;
+            --input-border: #4d4d4d;
+        }
+        
         body {
-            background-color: #1a1a1a;
-            color: #ffffff;
-            height: 100vh;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: var(--text-color);
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0;
-            padding: 0;
+            padding: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         .login-container {
-            background-color: #2d2d2d;
-            border-radius: 10px;
-            padding: 2rem;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             width: 100%;
-            max-width: 400px;
+            max-width: 420px;
+            position: relative;
+            overflow: hidden;
+            transform: translateY(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .login-container:hover {
+            transform: translateY(-5px);
         }
         
         .login-logo {
             text-align: center;
             margin-bottom: 2rem;
+            animation: fadeInDown 1s ease;
         }
         
         .login-logo i {
-            font-size: 3rem;
-            color: #4CAF50;
+            font-size: 3.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            animation: pulse 2s infinite;
+        }
+        
+        .login-logo h2 {
+            font-weight: 600;
+            margin: 0;
+            background: linear-gradient(45deg, var(--primary-color), #8BC34A);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         
         .form-control {
-            background-color: #3d3d3d;
-            border: 1px solid #4d4d4d;
-            color: #ffffff;
+            background-color: var(--input-bg);
+            border: 2px solid var(--input-border);
+            color: var(--text-color);
+            padding: 12px 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
         }
         
         .form-control:focus {
-            background-color: #3d3d3d;
-            border-color: #4CAF50;
-            color: #ffffff;
+            background-color: var(--input-bg);
+            border-color: var(--primary-color);
+            color: var(--text-color);
             box-shadow: 0 0 0 0.25rem rgba(76, 175, 80, 0.25);
+            transform: translateY(-2px);
+        }
+        
+        .form-label {
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
         }
         
         .btn-primary {
-            background-color: #4CAF50;
-            border-color: #4CAF50;
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            padding: 12px;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
         
         .btn-primary:hover {
-            background-color: #45a049;
-            border-color: #45a049;
+            background-color: var(--primary-hover);
+            border-color: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+        
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%, -50%);
+            transform-origin: 50% 50%;
+        }
+        
+        .btn-primary:active::after {
+            animation: ripple 1s ease-out;
+        }
+        
+        .alert {
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .input-group {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+        
+        .input-group i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary-color);
+            transition: all 0.3s ease;
+        }
+        
+        .input-group .form-control {
+            padding-left: 45px;
+        }
+        
+        .input-group .form-control:focus + i {
+            color: var(--primary-color);
+            transform: translateY(-50%) scale(1.2);
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes ripple {
+            0% {
+                transform: scale(0, 0);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(100, 100);
+                opacity: 0;
+            }
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+        
+        .particle {
+            position: absolute;
+            background: var(--primary-color);
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: particle-animation 15s infinite;
+        }
+        
+        @keyframes particle-animation {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.1;
+            }
+            100% {
+                transform: translateY(-1000px) rotate(720deg);
+                opacity: 0;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="login-container">
+    <div class="particles">
+        <?php for($i = 0; $i < 20; $i++): ?>
+            <div class="particle" style="
+                width: <?php echo rand(5, 20); ?>px;
+                height: <?php echo rand(5, 20); ?>px;
+                left: <?php echo rand(0, 100); ?>%;
+                top: <?php echo rand(0, 100); ?>%;
+                animation-delay: <?php echo rand(0, 10); ?>s;
+                animation-duration: <?php echo rand(10, 20); ?>s;
+            "></div>
+        <?php endfor; ?>
+    </div>
+    
+    <div class="login-container animate__animated animate__fadeIn">
         <div class="login-logo">
-            <i class="fas fa-heartbeat"></i>
-            <h2 class="mt-3">SantéPlus</h2>
+            <i class="fas fa-heartbeat floating"></i>
+            <h2>SantéPlus</h2>
         </div>
         
         <?php if ($error): ?>
-            <div class="alert alert-danger"><?php echo $error; ?></div>
+            <div class="alert alert-danger animate__animated animate__shakeX">
+                <i class="fas fa-exclamation-circle me-2"></i>
+                <?php echo $error; ?>
+            </div>
         <?php endif; ?>
         
         <?php if ($success): ?>
-            <div class="alert alert-success"><?php echo $success; ?></div>
+            <div class="alert alert-success animate__animated animate__fadeIn">
+                <i class="fas fa-check-circle me-2"></i>
+                <?php echo $success; ?>
+            </div>
         <?php endif; ?>
         
-        <form method="POST" action="">
-            <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" name="email" required>
+        <form method="POST" action="" class="animate__animated animate__fadeInUp">
+            <div class="input-group">
+                <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+                <i class="fas fa-envelope"></i>
             </div>
             
-            <div class="mb-3">
-                <label for="password" class="form-label">Mot de passe</label>
-                <input type="password" class="form-control" id="password" name="password" required>
+            <div class="input-group">
+                <input type="password" class="form-control" id="password" name="password" placeholder="Mot de passe" required>
+                <i class="fas fa-lock"></i>
             </div>
             
-            <button type="submit" class="btn btn-primary w-100">Se connecter</button>
+            <button type="submit" class="btn btn-primary w-100">
+                <i class="fas fa-sign-in-alt me-2"></i>
+                Se connecter
+            </button>
         </form>
     </div>
     
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Animation des particules
+        document.addEventListener('DOMContentLoaded', function() {
+            const particles = document.querySelectorAll('.particle');
+            particles.forEach(particle => {
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+            });
+        });
+        
+        // Animation des champs de formulaire
+        const inputs = document.querySelectorAll('.form-control');
+        inputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.classList.add('focused');
+            });
+            
+            input.addEventListener('blur', function() {
+                if (this.value === '') {
+                    this.parentElement.classList.remove('focused');
+                }
+            });
+        });
+    </script>
 </body>
 </html> 

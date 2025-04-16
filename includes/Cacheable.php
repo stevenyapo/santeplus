@@ -3,7 +3,7 @@ trait Cacheable {
     protected $cacheManager;
     protected $cachePrefix;
     
-    public function __construct() {
+    protected function initCacheable() {
         $this->cacheManager = CacheManager::getInstance();
         $this->cachePrefix = strtolower(get_class($this)) . ':';
     }

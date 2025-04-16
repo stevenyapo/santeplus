@@ -9,7 +9,8 @@ class User {
     public function __construct() {
         global $pdo;
         $this->pdo = $pdo;
-        parent::__construct();
+        // Initialiser le trait Cacheable
+        $this->initCacheable();
     }
     
     public function getActiveUsers() {
